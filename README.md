@@ -1,45 +1,24 @@
 # mcp-coworker
 
 
+## System Workflow
 
-User Input
-   │
-   ▼
-┌────────────────────┐
-│   Frontend UI       │
-└────────────────────┘
-   │  sends message
-   ▼
-┌────────────────────┐
-│   FastAPI Backend   │
-└────────────────────┘
-   │ forwards message
-   ▼
-┌────────────────────┐
-│    OpenAI Agent     │
-│  (Reasoning + Tools)│
-└────────────────────┘
-   │ decides tool usage
-   ▼
-┌────────────────────┐      ┌──────────────────────┐
-│  FastMCP Tool Hub   │◀───▶│ Tool Execution Engine │
-└────────────────────┘      └──────────────────────┘
-   │ returns structured data
-   ▼
-┌────────────────────┐
-│   OpenAI Agent      │
-└────────────────────┘
-   │ chat + structured output
-   ▼
-┌────────────────────┐
-│  FastAPI Backend    │
-└────────────────────┘
-   │
-   ▼
-┌────────────────────┐
-│  Frontend UI (two   │
-│  panels update)     │
-└────────────────────┘
+```mermaid
+flowchart LR
+    U[User Input] --> FE[Frontend UI]
+
+    FE --> API[FastAPI Backend]
+
+    API --> AG[OpenAI Agent<br/>(Reasoning + Tools)]
+    
+    AG --> HUB[FastMCP Tool Hub]
+    HUB --> TE[Tool Execution Engine]
+    TE --> HUB
+    
+    HUB --> AG
+    AG --> API
+    API --> FE[Frontend UI<br/>(Two panels update)]
+
 
 
 
