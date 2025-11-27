@@ -1,4 +1,4 @@
-# map-coworker
+# mcp-coworker
 
 
 
